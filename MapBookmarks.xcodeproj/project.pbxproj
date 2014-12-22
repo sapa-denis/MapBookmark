@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2CBA7FE381341C8978CD9FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEFAD01852C4351AEBF8E7D /* libPods.a */; };
+		EA49DF6A1A476E2600BE7047 /* BookmarkDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA49DF691A476E2600BE7047 /* BookmarkDetailsTableViewController.m */; };
+		EABB42B11A463C4000DDC27E /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = EABB42B01A463C4000DDC27E /* Bookmark.m */; };
+		EABB42B51A465B7E00DDC27E /* BookmarksList.m in Sources */ = {isa = PBXBuildFile; fileRef = EABB42B41A465B7E00DDC27E /* BookmarksList.m */; };
 		EAE215E01A3D90B600E6E07A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215DF1A3D90B600E6E07A /* main.m */; };
 		EAE215E31A3D90B600E6E07A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E21A3D90B600E6E07A /* AppDelegate.m */; };
 		EAE215E61A3D90B600E6E07A /* MapBookmarks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E41A3D90B600E6E07A /* MapBookmarks.xcdatamodeld */; };
-		EAE215E91A3D90B600E6E07A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E81A3D90B600E6E07A /* ViewController.m */; };
 		EAE215EC1A3D90B600E6E07A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE215EA1A3D90B600E6E07A /* Main.storyboard */; };
 		EAE215EE1A3D90B600E6E07A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE215ED1A3D90B600E6E07A /* Images.xcassets */; };
 		EAE215F11A3D90B600E6E07A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE215EF1A3D90B600E6E07A /* LaunchScreen.xib */; };
 		EAE215FD1A3D90B600E6E07A /* MapBookmarksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215FC1A3D90B600E6E07A /* MapBookmarksTests.m */; };
+		EAE216071A3E010600E6E07A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE216061A3E010600E6E07A /* QuartzCore.framework */; };
+		EAE2160A1A3E08B400E6E07A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE216091A3E08B400E6E07A /* MapViewController.m */; };
+		EAE2160C1A3E09BF00E6E07A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE2160B1A3E09BF00E6E07A /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,20 +34,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FEFAD01852C4351AEBF8E7D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE3366A331944786B42975BF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		EA49DF681A476E2600BE7047 /* BookmarkDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkDetailsTableViewController.h; sourceTree = "<group>"; };
+		EA49DF691A476E2600BE7047 /* BookmarkDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkDetailsTableViewController.m; sourceTree = "<group>"; };
+		EABB42AF1A463C4000DDC27E /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		EABB42B01A463C4000DDC27E /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		EABB42B31A465B7E00DDC27E /* BookmarksList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksList.h; sourceTree = "<group>"; };
+		EABB42B41A465B7E00DDC27E /* BookmarksList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksList.m; sourceTree = "<group>"; };
 		EAE215DA1A3D90B600E6E07A /* MapBookmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapBookmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE215DE1A3D90B600E6E07A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE215DF1A3D90B600E6E07A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EAE215E11A3D90B600E6E07A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EAE215E21A3D90B600E6E07A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EAE215E51A3D90B600E6E07A /* MapBookmarks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapBookmarks.xcdatamodel; sourceTree = "<group>"; };
-		EAE215E71A3D90B600E6E07A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EAE215E81A3D90B600E6E07A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EAE215EB1A3D90B600E6E07A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EAE215ED1A3D90B600E6E07A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EAE215F01A3D90B600E6E07A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EAE215F61A3D90B600E6E07A /* MapBookmarksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapBookmarksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE215FB1A3D90B600E6E07A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE215FC1A3D90B600E6E07A /* MapBookmarksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapBookmarksTests.m; sourceTree = "<group>"; };
+		EAE216061A3E010600E6E07A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EAE216081A3E08B400E6E07A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		EAE216091A3E08B400E6E07A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		EAE2160B1A3E09BF00E6E07A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +65,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE2160C1A3E09BF00E6E07A /* MapKit.framework in Frameworks */,
+				EAE216071A3E010600E6E07A /* QuartzCore.framework in Frameworks */,
+				D2CBA7FE381341C8978CD9FF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +81,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D88576E5AA034F39AB2A95CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2160B1A3E09BF00E6E07A /* MapKit.framework */,
+				EAE216061A3E010600E6E07A /* QuartzCore.framework */,
+				6FEFAD01852C4351AEBF8E7D /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EABB42AE1A463C1300DDC27E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EABB42AF1A463C4000DDC27E /* Bookmark.h */,
+				EABB42B01A463C4000DDC27E /* Bookmark.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		EABB42B21A465B2000DDC27E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EAE216081A3E08B400E6E07A /* MapViewController.h */,
+				EAE216091A3E08B400E6E07A /* MapViewController.m */,
+				EABB42B31A465B7E00DDC27E /* BookmarksList.h */,
+				EABB42B41A465B7E00DDC27E /* BookmarksList.m */,
+				EA49DF681A476E2600BE7047 /* BookmarkDetailsTableViewController.h */,
+				EA49DF691A476E2600BE7047 /* BookmarkDetailsTableViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		EAE215D11A3D90B600E6E07A = {
 			isa = PBXGroup;
 			children = (
 				EAE215DC1A3D90B600E6E07A /* MapBookmarks */,
 				EAE215F91A3D90B600E6E07A /* MapBookmarksTests */,
 				EAE215DB1A3D90B600E6E07A /* Products */,
+				AE3366A331944786B42975BF /* Pods.xcconfig */,
+				D88576E5AA034F39AB2A95CC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,10 +136,10 @@
 		EAE215DC1A3D90B600E6E07A /* MapBookmarks */ = {
 			isa = PBXGroup;
 			children = (
+				EABB42B21A465B2000DDC27E /* ViewControllers */,
+				EABB42AE1A463C1300DDC27E /* Model */,
 				EAE215E11A3D90B600E6E07A /* AppDelegate.h */,
 				EAE215E21A3D90B600E6E07A /* AppDelegate.m */,
-				EAE215E71A3D90B600E6E07A /* ViewController.h */,
-				EAE215E81A3D90B600E6E07A /* ViewController.m */,
 				EAE215EA1A3D90B600E6E07A /* Main.storyboard */,
 				EAE215ED1A3D90B600E6E07A /* Images.xcassets */,
 				EAE215EF1A3D90B600E6E07A /* LaunchScreen.xib */,
@@ -129,9 +182,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAE216001A3D90B600E6E07A /* Build configuration list for PBXNativeTarget "MapBookmarks" */;
 			buildPhases = (
+				29D11C7A544349708A3BF269 /* Check Pods Manifest.lock */,
 				EAE215D61A3D90B600E6E07A /* Sources */,
 				EAE215D71A3D90B600E6E07A /* Frameworks */,
 				EAE215D81A3D90B600E6E07A /* Resources */,
+				58064121F41E43D8B5F8E8A9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -171,6 +226,11 @@
 				TargetAttributes = {
 					EAE215D91A3D90B600E6E07A = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					EAE215F51A3D90B600E6E07A = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -217,6 +277,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29D11C7A544349708A3BF269 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		58064121F41E43D8B5F8E8A9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EAE215D61A3D90B600E6E07A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -224,8 +317,11 @@
 			files = (
 				EAE215E31A3D90B600E6E07A /* AppDelegate.m in Sources */,
 				EAE215E01A3D90B600E6E07A /* main.m in Sources */,
-				EAE215E91A3D90B600E6E07A /* ViewController.m in Sources */,
 				EAE215E61A3D90B600E6E07A /* MapBookmarks.xcdatamodeld in Sources */,
+				EABB42B11A463C4000DDC27E /* Bookmark.m in Sources */,
+				EA49DF6A1A476E2600BE7047 /* BookmarkDetailsTableViewController.m in Sources */,
+				EAE2160A1A3E08B400E6E07A /* MapViewController.m in Sources */,
+				EABB42B51A465B7E00DDC27E /* BookmarksList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +441,7 @@
 		};
 		EAE216011A3D90B600E6E07A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE3366A331944786B42975BF /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MapBookmarks/Info.plist;
@@ -355,6 +452,7 @@
 		};
 		EAE216021A3D90B600E6E07A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE3366A331944786B42975BF /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MapBookmarks/Info.plist;
@@ -416,6 +514,7 @@
 				EAE216021A3D90B600E6E07A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAE216031A3D90B600E6E07A /* Build configuration list for PBXNativeTarget "MapBookmarksTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +523,7 @@
 				EAE216051A3D90B600E6E07A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
