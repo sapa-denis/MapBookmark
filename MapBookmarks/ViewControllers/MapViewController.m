@@ -92,7 +92,6 @@
 
 - (IBAction)putNewBookmark:(UILongPressGestureRecognizer *)sender
 {
-	NSLog(@"%ld", sender.state);
 	if (sender.state == UIGestureRecognizerStateBegan) {
 		CGPoint locationOnView = [sender locationInView:self.mapView];
 		CLLocationCoordinate2D coordinateOnMap = [self.mapView convertPoint:locationOnView
@@ -211,7 +210,68 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-	[self centerMapViewForLocation:userLocation];
+	[self centerMapViewForLocation:userLocation.location];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+	MKAnnotationView *view = [[mapView viewForAnnotation:annotation] image];
+	
+	if ([annotation isKindOfClass:[MKUserLocation class]])
+	{
+//		view.image = [UIImage imageNamed:@"Arrow"];
+//		return view;
+		MKAnnotationView *userView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"UserAnnotationView"];
+		if (!userView)
+		{
+			// If an existing pin view was not available, create one.
+			userView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"UserAnnotationView"];
+			//pinView.animatesDrop = YES;
+			userView.canShowCallout = YES;
+			userView.image = [UIImage imageNamed:@"Arrow"];
+			userView.centerOffset = CGPointMake(0, userView.image.size.height / 2);
+			
+		
+			// Add a detail disclosure button to the callout.
+
+			
+			
+			return userView;
+		}
+	}
+	
+	// Handle any custom annotations.
+	if ([annotation isKindOfClass:[MKPointAnnotation class]])
+	{
+		// Try to dequeue an existing pin view first.
+		MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"BookmarkPinAnnotationView"];
+		if (!pinView)
+		{
+			// If an existing pin view was not available, create one.
+			pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"BookmarkPinAnnotationView"];
+			//pinView.animatesDrop = YES;
+			pinView.canShowCallout = YES;
+
+			UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeSystem];
+			pinView.rightCalloutAccessoryView = rightButton;
+			
+		} else {
+			pinView.annotation = annotation;
+		}
+		return pinView;
+	}
+	
+	return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+	id <MKAnnotation> annotation = [view annotation];
+	
+	NSInteger index = [[mapView annotations] indexOfObject:annotation];
+	if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+		NSLog(@"%@", [[self.usersBookmarks objectAtIndex:index] locationName]);
+	}
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id)overlay {
@@ -224,6 +284,8 @@
 	}
 	return nil;
 }
+
+
 
 #pragma mark - CLLocationManagerDelegate
 
