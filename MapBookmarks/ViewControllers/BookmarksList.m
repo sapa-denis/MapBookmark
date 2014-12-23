@@ -9,7 +9,8 @@
 #import "BookmarksList.h"
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
-#import "AppDelegate.h"
+#import "BookmarkDetailsViewController.h"
+#import "Bookmark.h"
 
 @interface BookmarksList ()
 
@@ -28,9 +29,9 @@
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
 	
-	AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-	if ([delegate performSelector:@selector(managedObjectContext)]) {
-		_managedObjectContext = [delegate managedObjectContext];
+	id delegate = [[UIApplication sharedApplication] delegate];
+	if ([delegate respondsToSelector:@selector(managedObjectContext)]) {
+		_managedObjectContext = [delegate performSelector:@selector(managedObjectContext)];
 	}
 	
 	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -64,15 +65,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BookmarkCell"
 															forIndexPath:indexPath];
     
-	cell.textLabel.text = @"Bookmark";
 	
-	NSManagedObject *bookmark = [self.usersBookmarks objectAtIndex:indexPath.row];
-	double latitude = [[bookmark valueForKey:@"latitude"] doubleValue];
-	double longitude = [[bookmark valueForKey:@"longitude"] doubleValue];
-
-	CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-	cell.detailTextLabel.text = location.description;
-    
+	Bookmark *bookmark = [self.usersBookmarks objectAtIndex:indexPath.row];
+	cell.textLabel.text = bookmark.locationName;
+	cell.detailTextLabel.text = bookmark.location.description;
     return cell;
 }
 
@@ -87,49 +83,29 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 		
-		
-
-		NSManagedObject *eventToDelete = [self.usersBookmarks objectAtIndex:indexPath.row];
-		[self.managedObjectContext deleteObject:eventToDelete];
-		
-		// Update the array and table view.
+		Bookmark *bookmarkToDelete = [self.usersBookmarks objectAtIndex:indexPath.row];
+		[self.managedObjectContext deleteObject:bookmarkToDelete];
 		[self.usersBookmarks removeObjectAtIndex:indexPath.row];
 		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
 		
-
 		NSError *error = nil;
 		if (![self.managedObjectContext save:&error]) {
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 			abort();
 		}
 		
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+	if ([segue.identifier isEqualToString:@"BookmarkDetails"]) {
+		BookmarkDetailsViewController *destination = [segue destinationViewController];
+		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+		destination.bookmark = [self.usersBookmarks objectAtIndex:indexPath.row];
+	}
 }
 
 

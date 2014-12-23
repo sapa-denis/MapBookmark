@@ -10,17 +10,28 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreData/CoreData.h>
+#import <WYPopoverController/WYStoryboardPopoverSegue.h>
+#import "SelectDestinationPointViewController.h"
 
 #import "AppDelegate.h"
+#import "Bookmark.h"
 
-@interface MapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController () <MKMapViewDelegate,
+								CLLocationManagerDelegate,
+								WYPopoverControllerDelegate,
+								SelectDestinationPointViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *routeBarButton;
+
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *location;
 
-@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic,strong) NSArray* usersBookmarks;
+
+@property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic,strong) NSMutableArray *usersBookmarks;
+
+@property (nonatomic, strong) WYPopoverController *destinationsPopoverController;
 
 @end
 
@@ -33,8 +44,6 @@
 		_locationManager = [[CLLocationManager alloc] init];
 		[_locationManager setDelegate:self];
 		[_locationManager requestAlwaysAuthorization];
-		
-
 	}
 	return self;
 }
@@ -43,36 +52,33 @@
 {
     [super viewDidLoad];
 	
-	
+	self.locationManager.distanceFilter = kCLDistanceFilterNone;
+	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 	[self.locationManager startUpdatingLocation];
 	[self.mapView setAutoresizingMask: UIViewAutoresizingFlexibleWidth
 									 | UIViewAutoresizingFlexibleHeight];
-	
-
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	
-	AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-	if ([delegate performSelector:@selector(managedObjectContext)]) {
-		_managedObjectContext = [delegate managedObjectContext];
+	id delegate = [[UIApplication sharedApplication] delegate];
+	if ([delegate respondsToSelector:@selector(managedObjectContext)]) {
+		_managedObjectContext = [delegate performSelector:@selector(managedObjectContext)];
 	}
-
-
 	
-	self.locationManager.distanceFilter = kCLDistanceFilterNone;
-	self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 	[self.locationManager startUpdatingLocation];
 
-	MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
-	region.center.latitude = self.locationManager.location.coordinate.latitude;
-	region.center.longitude = self.locationManager.location.coordinate.longitude;
-	region.span.longitudeDelta = 0.01f;
-	region.span.longitudeDelta = 0.01f;
-	[self.mapView setRegion:region animated:YES];
+//	MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+//	region.center.latitude = self.locationManager.location.coordinate.latitude;
+//	region.center.longitude = self.locationManager.location.coordinate.longitude;
+	
+//	[self centerMapViewForLocation:self.locationManager.location];
+	
+//	region.span.longitudeDelta = 0.01f;
+//	region.span.longitudeDelta = 0.01f;
+//	[self.mapView setRegion:region animated:YES];
 	
 	[self showUsersBookmarks];
 }
@@ -92,56 +98,42 @@
 		CLLocationCoordinate2D coordinateOnMap = [self.mapView convertPoint:locationOnView
 													   toCoordinateFromView:self.mapView];
 		
+		Bookmark *newBookmark = [Bookmark createBookmark];
+
+		CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinateOnMap.latitude
+														  longitude:coordinateOnMap.longitude];
+		[newBookmark setLocation:location];
+		[self.usersBookmarks addObject:newBookmark];
+		
 		MKPointAnnotation *point = [MKPointAnnotation new];
-		
 		[point setCoordinate:coordinateOnMap];
+		[point setTitle:newBookmark.locationName];
 		[self.mapView addAnnotation:point];
-		
-		NSManagedObject *newBookmark = [NSEntityDescription insertNewObjectForEntityForName:@"Bookmark"
-															   inManagedObjectContext:self.managedObjectContext];
-		
-		[newBookmark setValue:@(coordinateOnMap.latitude) forKey:@"latitude"];
-		[newBookmark setValue:@(coordinateOnMap.longitude) forKey:@"longitude"];
 		
 		NSError *error = nil;
 		if (![self.managedObjectContext save:&error]) {
 			NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
 		}
+
 	}
 }
 
-- (IBAction)routBarButtonTouchUp:(UIBarButtonItem *)sender
+- (void)clearRoutBarButtonTouchUp:(UIBarButtonItem *)sender
 {
-	if (sender.tag == 0) {
-		[sender setTitle:@"Clear Route"];
-		[sender setTag:1];
-		[self hideUsersBookmarks];
-		
+	[sender setTag:0];
+	[sender setTitle:@"Route"];
+	[self.mapView removeOverlays:[self.mapView overlays]];
+	[self hideUsersBookmarks];
+	[self showUsersBookmarks];
 
-		NSManagedObject *bookmark = [self.usersBookmarks lastObject];
-		double latitude = [[bookmark valueForKey:@"latitude"] doubleValue];
-		double longitude = [[bookmark valueForKey:@"longitude"] doubleValue];
-
-			
-		CLLocation *destinationLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-
-
-
-		
-		[self calculateRouteToLocation:destinationLocation];
-
-	} else if (sender.tag == 1) {
-		[sender setTag:0];
-		[sender setTitle:@"Route"];
-		[self.mapView removeOverlays:[self.mapView overlays]];
-		[self hideUsersBookmarks];
-		[self showUsersBookmarks];
-	}
-	
+	[sender setAction:@selector(routBarButtonTouchUp:)];
+	[sender setTarget:self];
 }
 
-- (IBAction)bookmarkBarButtonTouchUp:(UIBarButtonItem *)sender
+- (void)routBarButtonTouchUp:(UIBarButtonItem *)sender
 {
+	[self performSegueWithIdentifier:@"SelectDestinationPointSegue"
+							  sender:sender];
 }
 
 - (void)calculateRouteToLocation:(CLLocation *)dest
@@ -182,17 +174,30 @@
 	}];
 }
 
+- (void)drawRoadToLocaton:(CLLocation *)destination
+{
+	[self.routeBarButton setTitle:@"Clear Route"];
+	[self.routeBarButton setAction:@selector(clearRoutBarButtonTouchUp:)];
+	[self.routeBarButton setTarget:self];
+	
+	[self hideUsersBookmarks];
+	[self calculateRouteToLocation:destination];
+}
+
+- (void)centerMapViewForLocation:(CLLocation *)mapCenter
+{
+	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapCenter.coordinate, 800, 800);
+	[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+}
+
 - (void)showUsersBookmarks
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
 	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-	for (NSManagedObject *bookmark in self.usersBookmarks) {
-		double latitude = [[bookmark valueForKey:@"latitude"] doubleValue];
-		double longitude = [[bookmark valueForKey:@"longitude"] doubleValue];
-		CLLocationCoordinate2D coordinate = {latitude, longitude};
-		
+	for (Bookmark *bookmark in self.usersBookmarks) {
 		MKPointAnnotation *point = [MKPointAnnotation new];
-		[point setCoordinate:coordinate];
+		[point setCoordinate:bookmark.location.coordinate];
+		[point setTitle:bookmark.locationName];
 		[self.mapView addAnnotation:point];
 	}
 }
@@ -206,8 +211,7 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
-	[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+	[self centerMapViewForLocation:userLocation];
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id)overlay {
@@ -242,6 +246,58 @@
 	if (status == kCLAuthorizationStatusAuthorizedAlways ||
 		status == kCLAuthorizationStatusAuthorizedWhenInUse) {
 		[self.mapView setShowsUserLocation:YES];
+	}
+}
+
+#pragma mark - WYPopoverControllerDelegate
+
+- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
+{
+	return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
+{
+	if (controller == self.destinationsPopoverController) {
+		self.destinationsPopoverController.delegate = nil;
+		self.destinationsPopoverController = nil;
+	}
+}
+
+#pragma mark - SelectDestinationPointViewControllerDelegate
+
+- (void)destinationsPointViewController:(SelectDestinationPointViewController *)controller
+					  didSelectBookmark:(Bookmark *)bookmark
+{
+	controller.delegate = nil;
+	[self.destinationsPopoverController dismissPopoverAnimated:YES];
+	self.destinationsPopoverController.delegate = nil;
+	self.destinationsPopoverController = nil;
+	
+	[self drawRoadToLocaton:bookmark.location];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIBarButtonItem *)sender
+{
+	if ([segue.identifier isEqualToString:@"SelectDestinationPointSegue"])
+	{
+		WYStoryboardPopoverSegue *popoverSegue = (WYStoryboardPopoverSegue *)segue;
+		SelectDestinationPointViewController *destinationsController = [segue destinationViewController];
+		
+		
+		destinationsController.destinationPoints = self.usersBookmarks;
+		destinationsController.delegate = self;
+		destinationsController.preferredContentSize = CGSizeMake(320, 240);
+		
+
+		
+		self.destinationsPopoverController = [popoverSegue popoverControllerWithSender:sender
+													permittedArrowDirections:WYPopoverArrowDirectionDown
+																	animated:YES
+																	 options:WYPopoverAnimationOptionFadeWithScale];
+		self.destinationsPopoverController.delegate = self;
 	}
 }
 

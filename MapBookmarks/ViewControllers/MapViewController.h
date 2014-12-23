@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class CLLocation;
+
 @interface MapViewController : UIViewController
+
+//- (void)calculateRouteToLocation:(CLLocation *)dest;
+- (void)drawRoadToLocaton:(CLLocation *)destination;
+- (void)centerMapViewForLocation:(CLLocation *)mapCenter;
 
 @end

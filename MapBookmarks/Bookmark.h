@@ -12,7 +12,9 @@
 @interface Bookmark : NSManagedObject
 
 @property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, copy) NSString *locationName;
+@property (nonatomic, getter=isNamed) BOOL named;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
++ (instancetype)createBookmark;
 
 @end
