@@ -12,10 +12,10 @@
 #import "BookmarkDetailsViewController.h"
 #import "Bookmark.h"
 
-@interface BookmarksList ()
+@interface BookmarksList () <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSFetchedResultsController *dataSource;
-@property (nonatomic, strong) NSMutableArray *usersBookmarks;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+//@property (nonatomic, strong) NSMutableArray *usersBookmarks;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
@@ -27,29 +27,33 @@
     [super viewDidLoad];
 	self.clearsSelectionOnViewWillAppear = NO;
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-//	_dataSource = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-//													  managedObjectContext:[[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType]
-//														sectionNameKeyPath:@"latitude" cacheName:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
+	
 	id delegate = [[UIApplication sharedApplication] delegate];
 	if ([delegate respondsToSelector:@selector(managedObjectContext)]) {
 		_managedObjectContext = [delegate performSelector:@selector(managedObjectContext)];
 	}
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
-	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+	
+	NSError *error;
+	if (![[self fetchedResultsController] performFetch:&error]) {
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		exit(-1);  // Fail
+	}
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//	[super viewWillAppear:animated];
+//
+//	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
+//	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+//}
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -58,21 +62,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [self.usersBookmarks count];
-//	id <NSFetchedResultsSectionInfo> sectionInfo = self.dataSource.sections[section];
-//	return sectionInfo.numberOfObjects;
+	id  sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+	return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BookmarkCell"
 															forIndexPath:indexPath];
-    
 	
-	Bookmark *bookmark = [self.usersBookmarks objectAtIndex:indexPath.row];
+	
+	[self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureCell:(UITableViewCell *)cell
+		  atIndexPath:(NSIndexPath *)indexPath
+{
+	Bookmark *bookmark = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	cell.textLabel.text = bookmark.locationName;
 	cell.detailTextLabel.text = bookmark.location.description;
-    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,18 +95,68 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 		
-		Bookmark *bookmarkToDelete = [self.usersBookmarks objectAtIndex:indexPath.row];
+		Bookmark *bookmarkToDelete = [self.fetchedResultsController objectAtIndexPath:indexPath];
 		[self.managedObjectContext deleteObject:bookmarkToDelete];
-		[self.usersBookmarks removeObjectAtIndex:indexPath.row];
-		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
-		
-		NSError *error = nil;
-		if (![self.managedObjectContext save:&error]) {
-			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-			abort();
-		}
-		
     }
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+	[self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+ 
+	UITableView *tableView = self.tableView;
+ 
+	switch(type) {
+			
+		case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeUpdate:
+			[self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+					atIndexPath:indexPath];
+			break;
+			
+		case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+							 withRowAnimation:UITableViewRowAnimationFade];
+			break;
+	}
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+ 
+	switch(type) {
+			
+		case NSFetchedResultsChangeInsert:
+			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+	}
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+	// The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+	[self.tableView endUpdates];
 }
 
 #pragma mark - Navigation
@@ -107,8 +166,38 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 	if ([segue.identifier isEqualToString:@"BookmarkDetails"]) {
 		BookmarkDetailsViewController *destination = [segue destinationViewController];
 		NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-		destination.bookmark = [self.usersBookmarks objectAtIndex:indexPath.row];
+		destination.bookmark = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	}
+}
+
+#pragma mark - CoreData
+
+- (NSFetchedResultsController *)fetchedResultsController {
+ 
+	if (_fetchedResultsController != nil) {
+		return _fetchedResultsController;
+	}
+ 
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription
+								   entityForName:@"Bookmark" inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entity];
+ 
+	NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+							  initWithKey:@"locationName" ascending:NO];
+	[fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+ 
+	[fetchRequest setFetchBatchSize:20];
+ 
+	NSFetchedResultsController *theFetchedResultsController =
+	[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+										managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil
+												   cacheName:nil];
+	self.fetchedResultsController = theFetchedResultsController;
+	_fetchedResultsController.delegate = self;
+ 
+	return _fetchedResultsController;
+ 
 }
 
 
