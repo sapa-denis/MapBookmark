@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		D2CBA7FE381341C8978CD9FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEFAD01852C4351AEBF8E7D /* libPods.a */; };
-		EA49DF6A1A476E2600BE7047 /* BookmarkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA49DF691A476E2600BE7047 /* BookmarkDetailsViewController.m */; };
-		EA49DF6D1A48B1BF00BE7047 /* SelectDestinationPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA49DF6C1A48B1BF00BE7047 /* SelectDestinationPointViewController.m */; };
-		EA6D26201A4A403800669148 /* ForsquareAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D261F1A4A403800669148 /* ForsquareAPI.m */; };
-		EA6D26291A4A4C3600669148 /* MKMapView+BookmarkMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D26281A4A4C3600669148 /* MKMapView+BookmarkMap.m */; };
-		EABB42B11A463C4000DDC27E /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = EABB42B01A463C4000DDC27E /* Bookmark.m */; };
-		EABB42B51A465B7E00DDC27E /* BookmarksList.m in Sources */ = {isa = PBXBuildFile; fileRef = EABB42B41A465B7E00DDC27E /* BookmarksList.m */; };
-		EACAA3A81A4A17E10078B129 /* BookmarkPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EACAA3A71A4A17E10078B129 /* BookmarkPointAnnotation.m */; };
+		EA6D263F1A4A4FCC00669148 /* ForsquareAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D262D1A4A4FCC00669148 /* ForsquareAPI.m */; };
+		EA6D26401A4A4FCC00669148 /* BookmarkPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D262F1A4A4FCC00669148 /* BookmarkPointAnnotation.m */; };
+		EA6D26411A4A4FCC00669148 /* MKMapView+BookmarkMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D26321A4A4FCC00669148 /* MKMapView+BookmarkMap.m */; };
+		EA6D26421A4A4FCC00669148 /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D26351A4A4FCC00669148 /* Bookmark.m */; };
+		EA6D26431A4A4FCC00669148 /* BookmarkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D26381A4A4FCC00669148 /* BookmarkDetailsViewController.m */; };
+		EA6D26441A4A4FCC00669148 /* BookmarksList.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D263A1A4A4FCC00669148 /* BookmarksList.m */; };
+		EA6D26451A4A4FCC00669148 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D263C1A4A4FCC00669148 /* MapViewController.m */; };
+		EA6D26461A4A4FCC00669148 /* SelectDestinationPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D263E1A4A4FCC00669148 /* SelectDestinationPointViewController.m */; };
 		EAE215E01A3D90B600E6E07A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215DF1A3D90B600E6E07A /* main.m */; };
 		EAE215E31A3D90B600E6E07A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E21A3D90B600E6E07A /* AppDelegate.m */; };
 		EAE215E61A3D90B600E6E07A /* MapBookmarks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E41A3D90B600E6E07A /* MapBookmarks.xcdatamodeld */; };
@@ -23,7 +24,6 @@
 		EAE215F11A3D90B600E6E07A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAE215EF1A3D90B600E6E07A /* LaunchScreen.xib */; };
 		EAE215FD1A3D90B600E6E07A /* MapBookmarksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215FC1A3D90B600E6E07A /* MapBookmarksTests.m */; };
 		EAE216071A3E010600E6E07A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE216061A3E010600E6E07A /* QuartzCore.framework */; };
-		EAE2160A1A3E08B400E6E07A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE216091A3E08B400E6E07A /* MapViewController.m */; };
 		EAE2160C1A3E09BF00E6E07A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE2160B1A3E09BF00E6E07A /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,20 +40,22 @@
 /* Begin PBXFileReference section */
 		6FEFAD01852C4351AEBF8E7D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3366A331944786B42975BF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		EA49DF681A476E2600BE7047 /* BookmarkDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkDetailsViewController.h; sourceTree = "<group>"; };
-		EA49DF691A476E2600BE7047 /* BookmarkDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkDetailsViewController.m; sourceTree = "<group>"; };
-		EA49DF6B1A48B1BF00BE7047 /* SelectDestinationPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDestinationPointViewController.h; sourceTree = "<group>"; };
-		EA49DF6C1A48B1BF00BE7047 /* SelectDestinationPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDestinationPointViewController.m; sourceTree = "<group>"; };
-		EA6D261E1A4A403800669148 /* ForsquareAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForsquareAPI.h; sourceTree = "<group>"; };
-		EA6D261F1A4A403800669148 /* ForsquareAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForsquareAPI.m; sourceTree = "<group>"; };
-		EA6D26271A4A4C3600669148 /* MKMapView+BookmarkMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+BookmarkMap.h"; sourceTree = "<group>"; };
-		EA6D26281A4A4C3600669148 /* MKMapView+BookmarkMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+BookmarkMap.m"; sourceTree = "<group>"; };
-		EABB42AF1A463C4000DDC27E /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
-		EABB42B01A463C4000DDC27E /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
-		EABB42B31A465B7E00DDC27E /* BookmarksList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksList.h; sourceTree = "<group>"; };
-		EABB42B41A465B7E00DDC27E /* BookmarksList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksList.m; sourceTree = "<group>"; };
-		EACAA3A61A4A17E10078B129 /* BookmarkPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookmarkPointAnnotation.h; path = ViewControllers/BookmarkPointAnnotation.h; sourceTree = "<group>"; };
-		EACAA3A71A4A17E10078B129 /* BookmarkPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookmarkPointAnnotation.m; path = ViewControllers/BookmarkPointAnnotation.m; sourceTree = "<group>"; };
+		EA6D262C1A4A4FCC00669148 /* ForsquareAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForsquareAPI.h; sourceTree = "<group>"; };
+		EA6D262D1A4A4FCC00669148 /* ForsquareAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForsquareAPI.m; sourceTree = "<group>"; };
+		EA6D262E1A4A4FCC00669148 /* BookmarkPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkPointAnnotation.h; sourceTree = "<group>"; };
+		EA6D262F1A4A4FCC00669148 /* BookmarkPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkPointAnnotation.m; sourceTree = "<group>"; };
+		EA6D26311A4A4FCC00669148 /* MKMapView+BookmarkMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+BookmarkMap.h"; sourceTree = "<group>"; };
+		EA6D26321A4A4FCC00669148 /* MKMapView+BookmarkMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+BookmarkMap.m"; sourceTree = "<group>"; };
+		EA6D26341A4A4FCC00669148 /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		EA6D26351A4A4FCC00669148 /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		EA6D26371A4A4FCC00669148 /* BookmarkDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkDetailsViewController.h; sourceTree = "<group>"; };
+		EA6D26381A4A4FCC00669148 /* BookmarkDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkDetailsViewController.m; sourceTree = "<group>"; };
+		EA6D26391A4A4FCC00669148 /* BookmarksList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarksList.h; sourceTree = "<group>"; };
+		EA6D263A1A4A4FCC00669148 /* BookmarksList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarksList.m; sourceTree = "<group>"; };
+		EA6D263B1A4A4FCC00669148 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		EA6D263C1A4A4FCC00669148 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		EA6D263D1A4A4FCC00669148 /* SelectDestinationPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDestinationPointViewController.h; sourceTree = "<group>"; };
+		EA6D263E1A4A4FCC00669148 /* SelectDestinationPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDestinationPointViewController.m; sourceTree = "<group>"; };
 		EAE215DA1A3D90B600E6E07A /* MapBookmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapBookmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE215DE1A3D90B600E6E07A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE215DF1A3D90B600E6E07A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -67,8 +69,6 @@
 		EAE215FB1A3D90B600E6E07A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE215FC1A3D90B600E6E07A /* MapBookmarksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapBookmarksTests.m; sourceTree = "<group>"; };
 		EAE216061A3E010600E6E07A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		EAE216081A3E08B400E6E07A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		EAE216091A3E08B400E6E07A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		EAE2160B1A3E09BF00E6E07A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -103,53 +103,57 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA6D261D1A4A3FA800669148 /* API */ = {
+		EA6D262A1A4A4FCC00669148 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EA6D261E1A4A403800669148 /* ForsquareAPI.h */,
-				EA6D261F1A4A403800669148 /* ForsquareAPI.m */,
+				EA6D262B1A4A4FCC00669148 /* API */,
+				EA6D26301A4A4FCC00669148 /* Categories */,
+				EA6D26331A4A4FCC00669148 /* Model */,
+				EA6D26361A4A4FCC00669148 /* ViewControllers */,
+				EA6D262E1A4A4FCC00669148 /* BookmarkPointAnnotation.h */,
+				EA6D262F1A4A4FCC00669148 /* BookmarkPointAnnotation.m */,
 			);
-			name = API;
+			path = Classes;
 			sourceTree = "<group>";
 		};
-		EA6D26221A4A469B00669148 /* Controllers */ = {
+		EA6D262B1A4A4FCC00669148 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EACAA3A61A4A17E10078B129 /* BookmarkPointAnnotation.h */,
-				EACAA3A71A4A17E10078B129 /* BookmarkPointAnnotation.m */,
+				EA6D262C1A4A4FCC00669148 /* ForsquareAPI.h */,
+				EA6D262D1A4A4FCC00669148 /* ForsquareAPI.m */,
 			);
-			name = Controllers;
+			path = API;
 			sourceTree = "<group>";
 		};
-		EA6D26261A4A4B5400669148 /* Categories */ = {
+		EA6D26301A4A4FCC00669148 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				EA6D26271A4A4C3600669148 /* MKMapView+BookmarkMap.h */,
-				EA6D26281A4A4C3600669148 /* MKMapView+BookmarkMap.m */,
+				EA6D26311A4A4FCC00669148 /* MKMapView+BookmarkMap.h */,
+				EA6D26321A4A4FCC00669148 /* MKMapView+BookmarkMap.m */,
 			);
-			name = Categories;
+			path = Categories;
 			sourceTree = "<group>";
 		};
-		EABB42AE1A463C1300DDC27E /* Model */ = {
+		EA6D26331A4A4FCC00669148 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EABB42AF1A463C4000DDC27E /* Bookmark.h */,
-				EABB42B01A463C4000DDC27E /* Bookmark.m */,
+				EA6D26341A4A4FCC00669148 /* Bookmark.h */,
+				EA6D26351A4A4FCC00669148 /* Bookmark.m */,
 			);
-			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
-		EABB42B21A465B2000DDC27E /* ViewControllers */ = {
+		EA6D26361A4A4FCC00669148 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EAE216081A3E08B400E6E07A /* MapViewController.h */,
-				EAE216091A3E08B400E6E07A /* MapViewController.m */,
-				EABB42B31A465B7E00DDC27E /* BookmarksList.h */,
-				EABB42B41A465B7E00DDC27E /* BookmarksList.m */,
-				EA49DF681A476E2600BE7047 /* BookmarkDetailsViewController.h */,
-				EA49DF691A476E2600BE7047 /* BookmarkDetailsViewController.m */,
-				EA49DF6B1A48B1BF00BE7047 /* SelectDestinationPointViewController.h */,
-				EA49DF6C1A48B1BF00BE7047 /* SelectDestinationPointViewController.m */,
+				EA6D26371A4A4FCC00669148 /* BookmarkDetailsViewController.h */,
+				EA6D26381A4A4FCC00669148 /* BookmarkDetailsViewController.m */,
+				EA6D26391A4A4FCC00669148 /* BookmarksList.h */,
+				EA6D263A1A4A4FCC00669148 /* BookmarksList.m */,
+				EA6D263B1A4A4FCC00669148 /* MapViewController.h */,
+				EA6D263C1A4A4FCC00669148 /* MapViewController.m */,
+				EA6D263D1A4A4FCC00669148 /* SelectDestinationPointViewController.h */,
+				EA6D263E1A4A4FCC00669148 /* SelectDestinationPointViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -177,11 +181,7 @@
 		EAE215DC1A3D90B600E6E07A /* MapBookmarks */ = {
 			isa = PBXGroup;
 			children = (
-				EA6D26261A4A4B5400669148 /* Categories */,
-				EA6D26221A4A469B00669148 /* Controllers */,
-				EA6D261D1A4A3FA800669148 /* API */,
-				EABB42B21A465B2000DDC27E /* ViewControllers */,
-				EABB42AE1A463C1300DDC27E /* Model */,
+				EA6D262A1A4A4FCC00669148 /* Classes */,
 				EAE215E11A3D90B600E6E07A /* AppDelegate.h */,
 				EAE215E21A3D90B600E6E07A /* AppDelegate.m */,
 				EAE215EA1A3D90B600E6E07A /* Main.storyboard */,
@@ -360,16 +360,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAE215E31A3D90B600E6E07A /* AppDelegate.m in Sources */,
-				EACAA3A81A4A17E10078B129 /* BookmarkPointAnnotation.m in Sources */,
-				EA6D26291A4A4C3600669148 /* MKMapView+BookmarkMap.m in Sources */,
+				EA6D26401A4A4FCC00669148 /* BookmarkPointAnnotation.m in Sources */,
+				EA6D26441A4A4FCC00669148 /* BookmarksList.m in Sources */,
+				EA6D26411A4A4FCC00669148 /* MKMapView+BookmarkMap.m in Sources */,
+				EA6D26421A4A4FCC00669148 /* Bookmark.m in Sources */,
+				EA6D26461A4A4FCC00669148 /* SelectDestinationPointViewController.m in Sources */,
 				EAE215E01A3D90B600E6E07A /* main.m in Sources */,
+				EA6D26431A4A4FCC00669148 /* BookmarkDetailsViewController.m in Sources */,
+				EA6D26451A4A4FCC00669148 /* MapViewController.m in Sources */,
 				EAE215E61A3D90B600E6E07A /* MapBookmarks.xcdatamodeld in Sources */,
-				EABB42B11A463C4000DDC27E /* Bookmark.m in Sources */,
-				EA6D26201A4A403800669148 /* ForsquareAPI.m in Sources */,
-				EA49DF6D1A48B1BF00BE7047 /* SelectDestinationPointViewController.m in Sources */,
-				EA49DF6A1A476E2600BE7047 /* BookmarkDetailsViewController.m in Sources */,
-				EAE2160A1A3E08B400E6E07A /* MapViewController.m in Sources */,
-				EABB42B51A465B7E00DDC27E /* BookmarksList.m in Sources */,
+				EA6D263F1A4A4FCC00669148 /* ForsquareAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
