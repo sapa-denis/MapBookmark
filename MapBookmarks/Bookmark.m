@@ -68,7 +68,7 @@ static NSString *const kNamed = @"named";
 - (BOOL)isNamed
 {
 	[self willAccessValueForKey:kNamed];
-	BOOL named = [self primitiveValueForKey:kNamed];
+	BOOL named = [[self primitiveValueForKey:kNamed] boolValue];
 	[self didChangeValueForKey:kNamed];
 	return named;
 }

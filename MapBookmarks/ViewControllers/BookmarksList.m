@@ -27,18 +27,21 @@
     [super viewDidLoad];
 	self.clearsSelectionOnViewWillAppear = NO;
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
-	
-	id delegate = [[UIApplication sharedApplication] delegate];
-	if ([delegate respondsToSelector:@selector(managedObjectContext)]) {
-		_managedObjectContext = [delegate performSelector:@selector(managedObjectContext)];
-	}
-	
-	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
 
 //	_dataSource = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
 //													  managedObjectContext:[[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType]
 //														sectionNameKeyPath:@"latitude" cacheName:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	id delegate = [[UIApplication sharedApplication] delegate];
+	if ([delegate respondsToSelector:@selector(managedObjectContext)]) {
+		_managedObjectContext = [delegate performSelector:@selector(managedObjectContext)];
+	}
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
+	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
 }
 
 - (void)viewDidAppear:(BOOL)animated

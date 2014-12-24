@@ -7,6 +7,9 @@
 //
 
 #import "SelectDestinationPointViewController.h"
+#import "Bookmark.h"
+
+static NSString *const kReusableCellIdentifier = @"SelectDestinationPointCell";
 
 @interface SelectDestinationPointViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,7 +32,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-//
 }
 
 #pragma mark - UITableViewDataSource
@@ -46,12 +48,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell* cell = [aTableView dequeueReusableCellWithIdentifier:@"SelectDestinationPointCell"];
+	UITableViewCell* cell = [aTableView dequeueReusableCellWithIdentifier:kReusableCellIdentifier];
 	
 	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SelectDestinationPointCell"];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+									  reuseIdentifier:kReusableCellIdentifier];
 	}
-	cell.textLabel.text = [[self.destinationPoints objectAtIndex:indexPath.row] description];
+	cell.textLabel.text = [[self.destinationPoints objectAtIndex:indexPath.row] locationName];
 	
 	return cell;
 }
@@ -65,7 +68,6 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	[self.delegate destinationsPointViewController:self
 								 didSelectBookmark:[self.destinationPoints objectAtIndex:indexPath.row]];
 }

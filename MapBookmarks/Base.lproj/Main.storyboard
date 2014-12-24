@@ -8,11 +8,13 @@
         <scene sceneID="PDt-JT-P3x">
             <objects>
                 <navigationController id="Ks0-sS-bdA" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lZQ-Le-47j">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="gsd-d3-MW4">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="MST-9g-fTx" kind="relationship" relationship="rootViewController" id="4Ph-hf-qAS"/>
                     </connections>
@@ -34,7 +36,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outlet property="delegate" destination="MST-9g-fTx" id="VKi-db-Pny"/>
+                                    <outlet property="delegate" destination="MST-9g-fTx" id="ZbW-ir-PXy"/>
                                     <outletCollection property="gestureRecognizers" destination="Kjw-Zr-Zgc" appends="YES" id="0cw-Us-ZxQ"/>
                                 </connections>
                             </mapView>
@@ -57,6 +59,7 @@
                     <connections>
                         <outlet property="mapView" destination="D8G-kr-o8a" id="4yT-Bg-eqJ"/>
                         <outlet property="routeBarButton" destination="YjE-cy-Fct" id="ruz-Hi-REE"/>
+                        <segue destination="1cQ-8I-osv" kind="push" identifier="BookmarkDetails" id="8U2-jg-hdZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G4c-tX-m6v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -94,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gcq-yL-AjT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192" y="1031"/>
+            <point key="canvasLocation" x="227" y="1114"/>
         </scene>
         <!--Bookmarks-->
         <scene sceneID="fHA-ph-bQu">
@@ -135,14 +138,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Bookmarks" id="neO-SI-ZiW">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="zJb-0V-X9w"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="iZD-r1-8kw"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSQ-Cu-GrO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="512" y="314"/>
+            <point key="canvasLocation" x="686" y="-36"/>
         </scene>
-        <!--Bookmark Details View Controller-->
+        <!--Nearby Places-->
         <scene sceneID="wDl-Y5-Fc9">
             <objects>
                 <viewController id="1cQ-8I-osv" customClass="BookmarkDetailsViewController" sceneMemberID="viewController">
@@ -185,10 +189,21 @@
                                     <action selector="buildRouteButtonTouchUp:" destination="1cQ-8I-osv" eventType="touchUpInside" id="UCQ-Fz-6MY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l75-iS-o65">
+                                <rect key="frame" x="16" y="229" width="288" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Load Nearby Places">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loadPlacesButtonTouchUp:" destination="1cQ-8I-osv" eventType="touchUpInside" id="899-s0-Slh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7aP-fv-JMs">
+                    <navigationItem key="navigationItem" title="Nearby Places" id="7aP-fv-JMs">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="TyV-yj-VxX"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="vSP-mh-qWm">
                             <connections>
                                 <action selector="trashButtonTouchUp:" destination="1cQ-8I-osv" id="cYc-xR-iyn"/>
@@ -197,12 +212,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bookmarkNameLabel" destination="olF-hG-6WR" id="1OV-1f-vf6"/>
+                        <outlet property="loadPlacesButton" destination="l75-iS-o65" id="xuR-Zu-RqD"/>
                         <outlet property="nearPlacesPickerView" destination="raj-V4-JEP" id="UKk-RK-ymW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1y-Jh-0HS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="914" y="314"/>
+            <point key="canvasLocation" x="819" y="721"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -210,4 +226,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="8U2-jg-hdZ"/>
+    </inferredMetricsTieBreakers>
 </document>
