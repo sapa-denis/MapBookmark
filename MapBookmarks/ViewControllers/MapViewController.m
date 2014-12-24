@@ -15,6 +15,7 @@
 #import "Bookmark.h"
 #import "BookmarkPointAnnotation.h"
 #import "BookmarkDetailsViewController.h"
+#import "MKMapView+BookmarkMap.h"
 
 
 typedef NS_ENUM(NSInteger, MapViewControllerState) {
@@ -31,8 +32,6 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *routeBarButton;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLLocation *location;
-
 
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSMutableArray *usersBookmarks;
@@ -99,8 +98,11 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 		
 		Bookmark *newBookmark = [Bookmark createBookmark];
 
-		CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinateOnMap.latitude
-														  longitude:coordinateOnMap.longitude];
+		CLLocation *location = [[CLLocation alloc] initWithCoordinate:coordinateOnMap
+															 altitude:10
+												   horizontalAccuracy:10
+													 verticalAccuracy:10
+															timestamp:[NSDate date]];
 		[newBookmark setLocation:location];
 		[self.usersBookmarks addObject:newBookmark];
 		
@@ -124,7 +126,7 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 	
 	self.mapViewState = MapViewControllerBookmarksState;
 	[self.mapView removeOverlays:[self.mapView overlays]];
-	[self hideUsersBookmarks];
+	[self.mapView hideUsersBookmarks];
 	[self showUsersBookmarks];
 
 	[sender setAction:@selector(routBarButtonTouchUp:)];
@@ -137,59 +139,20 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 							  sender:sender];
 }
 
-- (void)calculateRouteToLocation:(CLLocation *)dest
-{
-	MKPlacemark *source = [[MKPlacemark alloc] initWithCoordinate:[[self.mapView userLocation] coordinate]
-												addressDictionary:@{ @"": @"" } ];
- 
-	MKMapItem *srcMapItem = [[MKMapItem alloc] initWithPlacemark:source];
-	[srcMapItem setName:@""];
- 
-	MKPlacemark *destination = [[MKPlacemark alloc]initWithCoordinate:[dest coordinate]
-													addressDictionary:@{ @"": @"" } ];
-	
-	[self.mapView addAnnotation:destination];
- 
-	MKMapItem *distMapItem = [[MKMapItem alloc]initWithPlacemark:destination];
-	[distMapItem setName:@""];
- 
-	MKDirectionsRequest *request = [[MKDirectionsRequest alloc]init];
-	[request setSource:srcMapItem];
-	[request setDestination:distMapItem];
-	[request setTransportType:MKDirectionsTransportTypeWalking];
- 
-	MKDirections *direction = [[MKDirections alloc]initWithRequest:request];
- 
-	[direction calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
-		
-		if (error) {
-			NSLog(@"Route build error: %@", [error localizedDescription]);
-			return;
-		}
-		NSLog(@"response = %@",response);
-		NSArray *arrRoutes = [response routes];
-		
-		MKRoute *rout = [arrRoutes firstObject];
-		MKPolyline *line = [rout polyline];
-		[self.mapView addOverlay:line];
-	}];
-}
-
 - (void)drawRoadToLocaton:(CLLocation *)destination
 {
 	[self.routeBarButton setTitle:@"Clear Route"];
 	[self.routeBarButton setAction:@selector(clearRoutBarButtonTouchUp:)];
 	[self.routeBarButton setTarget:self];
 	
-	[self hideUsersBookmarks];
+	[self.mapView hideUsersBookmarks];
 	self.mapViewState = MapViewControllerRouteState;
-	[self calculateRouteToLocation:destination];
+	[self.mapView calculateRouteToLocation:destination];
 }
 
 - (void)centerMapViewForLocation:(CLLocation *)mapCenter
 {
-	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapCenter.coordinate, 800, 800);
-	[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+	[self.mapView centerMapViewForLocation:mapCenter];
 }
 
 - (void)showUsersBookmarks
@@ -202,12 +165,7 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 	}
 }
 
-- (void)hideUsersBookmarks
-{
-	[self.mapView removeAnnotations:[self.mapView annotations]];
-}
-
-#pragma mark -- MKMapViewDelegate
+#pragma mark - MKMapViewDelegate
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
@@ -216,55 +174,28 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-	if ([annotation isKindOfClass:[MKUserLocation class]]) {
-		MKAnnotationView *userAnnotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"UserAnnotationView"];
-		if (!userAnnotationView) {
-			[[self.mapView userLocation] setTitle:@"You are here"];
-			userAnnotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
-															  reuseIdentifier:@"UserAnnotationView"];
-			userAnnotationView.canShowCallout = YES;
-			userAnnotationView.image = [UIImage imageNamed:@"Arrow"];
-			userAnnotationView.centerOffset = CGPointMake(0, userAnnotationView.image.size.height / 2);
-			return userAnnotationView;
-		}
-	} else if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
-		MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"BookmarkPinAnnotationView"];
-		if (!pinView) {
-			pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-													  reuseIdentifier:@"BookmarkPinAnnotationView"];
-			pinView.canShowCallout = YES;
-			pinView.animatesDrop = YES;
-			pinView.pinColor = MKPinAnnotationColorGreen;
-			UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-			pinView.rightCalloutAccessoryView = rightButton;
-		} else {
-			pinView.annotation = annotation;
-		}
-		return pinView;
-	}
-	
-	return nil;
+	return [mapView pinViewForAnnotation:annotation];
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+- (void)mapView:(MKMapView *)mapView
+ annotationView:(MKAnnotationView *)view
+calloutAccessoryControlTapped:(UIControl *)control
 {
-	BookmarkPointAnnotation *annotation = view.annotation;
-	NSLog(@"%@", [annotation.annotationBookmark locationName]);
 	[self performSegueWithIdentifier:@"BookmarkDetails" sender:view];
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id)overlay {
+- (MKOverlayView *)mapView:(MKMapView *)mapView
+			viewForOverlay:(id)overlay
+{
  
 	if ([overlay isKindOfClass:[MKPolyline class]]) {
-		MKPolylineView* aView = [[MKPolylineView alloc]initWithPolyline:(MKPolyline*)overlay] ;
-		aView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
-		aView.lineWidth = 10;
-		return aView;
+		MKPolylineView* polylineView = [[MKPolylineView alloc]initWithPolyline:(MKPolyline*)overlay] ;
+		polylineView.strokeColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
+		polylineView.lineWidth = 10;
+		return polylineView;
 	}
 	return nil;
 }
-
-
 
 #pragma mark - CLLocationManagerDelegate
 
@@ -272,7 +203,6 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 {
 	[self.locationManager requestWhenInUseAuthorization];
 	[self.locationManager startUpdatingLocation];
-	self.location = [locations lastObject];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status

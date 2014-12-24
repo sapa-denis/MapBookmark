@@ -21,8 +21,8 @@ static NSString *const kClientSecret = @"RQEJVOGGZXBQIVAP2ZKJWDWRUNM4CCKXFLGY3UE
 @implementation ForsquareAPI
 
 + (void)getNearLocationsNamesForLocation:(CLLocation *)location
-							 success:(void (^)(NSArray *locationsNames))handle
-								 failure:(void(^)(NSError *error))failure
+								 success:(void (^)(NSArray *locationsNames))handle
+								 failure:(void (^)(NSError *error))failure
 {
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
