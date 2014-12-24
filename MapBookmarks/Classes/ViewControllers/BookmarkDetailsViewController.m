@@ -99,7 +99,8 @@
 	[self.hud show];
 	
 	[ForsquareAPI getNearLocationsNamesForLocation:self.bookmark.location
-										   success:^(NSArray *locationsNames) {
+										   success:^(NSMutableArray *locationsNames) {
+											   [locationsNames insertObject:@"" atIndex:0];
 											   self.nearbyPlaces = [locationsNames copy];
 											   [self dismissHud];
 											   [self.loadPlacesButton setHidden:YES];

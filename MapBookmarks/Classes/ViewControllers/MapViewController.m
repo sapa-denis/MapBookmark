@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 	
 	self.mapViewState = MapViewControllerBookmarksState;
 	[self.mapView removeOverlays:[self.mapView overlays]];
-	[self.mapView hideUsersBookmarks];
+	[self.mapView mbm_hideUsersBookmarks];
 	[self showUsersBookmarks];
 
 	[sender setAction:@selector(routBarButtonTouchUp:)];
@@ -145,14 +145,14 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 	[self.routeBarButton setAction:@selector(clearRoutBarButtonTouchUp:)];
 	[self.routeBarButton setTarget:self];
 	
-	[self.mapView hideUsersBookmarks];
+	[self.mapView mbm_hideUsersBookmarks];
 	self.mapViewState = MapViewControllerRouteState;
-	[self.mapView calculateRouteToLocation:destination];
+	[self.mapView mbm_calculateRouteToLocation:destination];
 }
 
 - (void)centerMapViewForLocation:(CLLocation *)mapCenter
 {
-	[self.mapView centerMapViewForLocation:mapCenter];
+	[self.mapView mbm_centerMapViewForLocation:mapCenter];
 }
 
 - (void)showUsersBookmarks
@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-	return [mapView pinViewForAnnotation:annotation];
+	return [mapView mbm_viewForAnnotation:annotation];
 }
 
 - (void)mapView:(MKMapView *)mapView

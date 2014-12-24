@@ -10,9 +10,9 @@
 
 @interface MKMapView (BookmarkMap)
 
-- (MKAnnotationView *)pinViewForAnnotation:(id<MKAnnotation>)annotation;
-- (void)calculateRouteToLocation:(CLLocation *)dest;
-- (void)centerMapViewForLocation:(CLLocation *)mapCenter;
-- (void)hideUsersBookmarks;
+- (MKAnnotationView *)mbm_viewForAnnotation:(id<MKAnnotation>)annotation;
+- (void)mbm_calculateRouteToLocation:(CLLocation *)dest;
+- (void)mbm_centerMapViewForLocation:(CLLocation *)mapCenter;
+- (void)mbm_hideUsersBookmarks;
 
 @end

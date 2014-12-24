@@ -21,7 +21,7 @@ static NSString *const kClientSecret = @"RQEJVOGGZXBQIVAP2ZKJWDWRUNM4CCKXFLGY3UE
 @implementation ForsquareAPI
 
 + (void)getNearLocationsNamesForLocation:(CLLocation *)location
-								 success:(void (^)(NSArray *locationsNames))handle
+								 success:(void (^)(NSMutableArray *locationsNames))handle
 								 failure:(void (^)(NSError *error))failure
 {
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -45,6 +45,11 @@ static NSString *const kClientSecret = @"RQEJVOGGZXBQIVAP2ZKJWDWRUNM4CCKXFLGY3UE
 				 NSString *locationName = [venue valueForKey:@"name"];
 				 [result addObject:locationName];
 			 }
+			 
+			 [result sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+				 return [obj1 compare:obj2];
+			 }];
+			 
 			 handle(result);
 		 }
 		 failure:^(AFHTTPRequestOperation *operation, NSError *error) {

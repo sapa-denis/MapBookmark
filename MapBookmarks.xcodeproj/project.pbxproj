@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27028DEE1A4AC94300CA9246 /* UIColor+BookmarkColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 27028DED1A4AC94300CA9246 /* UIColor+BookmarkColor.m */; };
+		27028DF01A4AC97700CA9246 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27028DEF1A4AC97700CA9246 /* AppDelegate.m */; };
 		D2CBA7FE381341C8978CD9FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEFAD01852C4351AEBF8E7D /* libPods.a */; };
 		EA6D263F1A4A4FCC00669148 /* ForsquareAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D262D1A4A4FCC00669148 /* ForsquareAPI.m */; };
 		EA6D26401A4A4FCC00669148 /* BookmarkPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D262F1A4A4FCC00669148 /* BookmarkPointAnnotation.m */; };
@@ -17,7 +19,6 @@
 		EA6D26451A4A4FCC00669148 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D263C1A4A4FCC00669148 /* MapViewController.m */; };
 		EA6D26461A4A4FCC00669148 /* SelectDestinationPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D263E1A4A4FCC00669148 /* SelectDestinationPointViewController.m */; };
 		EAE215E01A3D90B600E6E07A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215DF1A3D90B600E6E07A /* main.m */; };
-		EAE215E31A3D90B600E6E07A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E21A3D90B600E6E07A /* AppDelegate.m */; };
 		EAE215E61A3D90B600E6E07A /* MapBookmarks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAE215E41A3D90B600E6E07A /* MapBookmarks.xcdatamodeld */; };
 		EAE215EC1A3D90B600E6E07A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE215EA1A3D90B600E6E07A /* Main.storyboard */; };
 		EAE215EE1A3D90B600E6E07A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE215ED1A3D90B600E6E07A /* Images.xcassets */; };
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27028DEC1A4AC94300CA9246 /* UIColor+BookmarkColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BookmarkColor.h"; sourceTree = "<group>"; };
+		27028DED1A4AC94300CA9246 /* UIColor+BookmarkColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BookmarkColor.m"; sourceTree = "<group>"; };
+		27028DEF1A4AC97700CA9246 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6FEFAD01852C4351AEBF8E7D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3366A331944786B42975BF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		EA6D262C1A4A4FCC00669148 /* ForsquareAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForsquareAPI.h; sourceTree = "<group>"; };
@@ -60,7 +64,6 @@
 		EAE215DE1A3D90B600E6E07A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAE215DF1A3D90B600E6E07A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EAE215E11A3D90B600E6E07A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		EAE215E21A3D90B600E6E07A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EAE215E51A3D90B600E6E07A /* MapBookmarks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MapBookmarks.xcdatamodel; sourceTree = "<group>"; };
 		EAE215EB1A3D90B600E6E07A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EAE215ED1A3D90B600E6E07A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 			children = (
 				EA6D26311A4A4FCC00669148 /* MKMapView+BookmarkMap.h */,
 				EA6D26321A4A4FCC00669148 /* MKMapView+BookmarkMap.m */,
+				27028DEC1A4AC94300CA9246 /* UIColor+BookmarkColor.h */,
+				27028DED1A4AC94300CA9246 /* UIColor+BookmarkColor.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -183,7 +188,7 @@
 			children = (
 				EA6D262A1A4A4FCC00669148 /* Classes */,
 				EAE215E11A3D90B600E6E07A /* AppDelegate.h */,
-				EAE215E21A3D90B600E6E07A /* AppDelegate.m */,
+				27028DEF1A4AC97700CA9246 /* AppDelegate.m */,
 				EAE215EA1A3D90B600E6E07A /* Main.storyboard */,
 				EAE215ED1A3D90B600E6E07A /* Images.xcassets */,
 				EAE215EF1A3D90B600E6E07A /* LaunchScreen.xib */,
@@ -359,14 +364,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAE215E31A3D90B600E6E07A /* AppDelegate.m in Sources */,
 				EA6D26401A4A4FCC00669148 /* BookmarkPointAnnotation.m in Sources */,
 				EA6D26441A4A4FCC00669148 /* BookmarksList.m in Sources */,
+				27028DEE1A4AC94300CA9246 /* UIColor+BookmarkColor.m in Sources */,
 				EA6D26411A4A4FCC00669148 /* MKMapView+BookmarkMap.m in Sources */,
 				EA6D26421A4A4FCC00669148 /* Bookmark.m in Sources */,
 				EA6D26461A4A4FCC00669148 /* SelectDestinationPointViewController.m in Sources */,
 				EAE215E01A3D90B600E6E07A /* main.m in Sources */,
 				EA6D26431A4A4FCC00669148 /* BookmarkDetailsViewController.m in Sources */,
+				27028DF01A4AC97700CA9246 /* AppDelegate.m in Sources */,
 				EA6D26451A4A4FCC00669148 /* MapViewController.m in Sources */,
 				EAE215E61A3D90B600E6E07A /* MapBookmarks.xcdatamodeld in Sources */,
 				EA6D263F1A4A4FCC00669148 /* ForsquareAPI.m in Sources */,

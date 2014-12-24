@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "UIColor+BookmarkColor.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//	[[UINavigationBar appearance] setTintColor:[UIColor redColor]];
-	[[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
+	[[UINavigationBar appearance] setBackgroundColor:[UIColor mbm_halfTransparentWhiteColor]];
 	[[UINavigationBar appearance] setOpaque:YES];
 	[[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	return YES;

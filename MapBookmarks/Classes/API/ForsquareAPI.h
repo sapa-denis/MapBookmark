@@ -13,7 +13,7 @@
 @interface ForsquareAPI : NSObject
 
 + (void)getNearLocationsNamesForLocation:(CLLocation *)location
-								 success:(void (^)(NSArray *locationsNames))handle
+								 success:(void (^)(NSMutableArray *locationsNames))handle
 								 failure:(void (^)(NSError *error))failure;
 
 @end

@@ -13,7 +13,7 @@ static NSString *const kBookmarkAnnotationIdentifier = @"BookmarkPinAnnotationVi
 
 @implementation MKMapView (BookmarkMap)
 
-- (MKAnnotationView *)pinViewForAnnotation:(id<MKAnnotation>)annotation
+- (MKAnnotationView *)mbm_viewForAnnotation:(id<MKAnnotation>)annotation
 {
 	if ([annotation isKindOfClass:[MKUserLocation class]]) {
 		MKAnnotationView *userAnnotationView = (MKAnnotationView*)[self dequeueReusableAnnotationViewWithIdentifier:kUserAnnotationIdentifier];
@@ -45,7 +45,7 @@ static NSString *const kBookmarkAnnotationIdentifier = @"BookmarkPinAnnotationVi
 	return nil;
 }
 
-- (void)calculateRouteToLocation:(CLLocation *)dest
+- (void)mbm_calculateRouteToLocation:(CLLocation *)dest
 {
 	MKPlacemark *source = [[MKPlacemark alloc] initWithCoordinate:[[self userLocation] coordinate]
 												addressDictionary:@{ @"": @"" } ];
@@ -81,13 +81,13 @@ static NSString *const kBookmarkAnnotationIdentifier = @"BookmarkPinAnnotationVi
 	}];
 }
 
-- (void)centerMapViewForLocation:(CLLocation *)mapCenter
+- (void)mbm_centerMapViewForLocation:(CLLocation *)mapCenter
 {
 	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapCenter.coordinate, 800, 800);
 	[self setRegion:[self regionThatFits:region] animated:YES];
 }
 
-- (void)hideUsersBookmarks
+- (void)mbm_hideUsersBookmarks
 {
 	[self removeAnnotations:self.annotations];
 }
