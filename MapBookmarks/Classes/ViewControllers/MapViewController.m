@@ -105,11 +105,11 @@ typedef NS_ENUM(NSInteger, MapViewControllerState) {
 															timestamp:[NSDate date]];
 		[newBookmark setLocation:location];
 		[self.usersBookmarks addObject:newBookmark];
+
+		BookmarkPointAnnotation *pointAnnotation = [[BookmarkPointAnnotation alloc] initWithBookmark:newBookmark];
+		[self.mapView addAnnotation:pointAnnotation];
 		
-		MKPointAnnotation *point = [MKPointAnnotation new];
-		[point setCoordinate:coordinateOnMap];
-		[point setTitle:newBookmark.locationName];
-		[self.mapView addAnnotation:point];
+		[self.mapView addAnnotation:pointAnnotation];
 		
 		NSError *error = nil;
 		if (![self.managedObjectContext save:&error]) {

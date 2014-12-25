@@ -15,7 +15,6 @@
 @interface BookmarksList () <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-//@property (nonatomic, strong) NSMutableArray *usersBookmarks;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
@@ -39,14 +38,6 @@
 		exit(-1);  // Fail
 	}
 }
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//	[super viewWillAppear:animated];
-//
-//	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Bookmark"];
-//	self.usersBookmarks = [[self.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-//}
 
 - (void)viewDidAppear:(BOOL)animated
 {

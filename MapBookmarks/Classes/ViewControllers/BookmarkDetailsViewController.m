@@ -90,7 +90,7 @@
 }
 - (IBAction)loadPlacesButtonTouchUp:(id)sender
 {
-	[self loadPlacesButton];
+	[self loadNearbyPlaces];
 }
 
 - (void)loadNearbyPlaces
